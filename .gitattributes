@@ -2,5 +2,6 @@
 * text=auto
 
 # Ignore config.py and __pycache__ directory
-/config.py
+/config.py/
 /__pycache__/
+
