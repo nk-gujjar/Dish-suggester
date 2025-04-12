@@ -24,31 +24,19 @@ if 'suggestions' not in st.session_state:
 st.sidebar.header("Input Methods")
 input_method = st.sidebar.radio("Select input:", ["📷 Camera Upload", "✍️ Manual Input"])
 
+
 if input_method == "📷 Camera Upload":
     uploaded_file = st.sidebar.file_uploader("Upload ingredients photo", type=["jpg", "jpeg", "png"])
+    
     if uploaded_file:
-        image = Image.open(uploaded_file)
-        st.sidebar.image(image, caption="Uploaded Ingredients", use_container_width=True)
-        
+        st.sidebar.image(uploaded_file, caption="Uploaded Ingredients", use_container_width=True)
+
         if st.sidebar.button("🔍 Analyze Image"):
             with st.spinner("Analyzing ingredients..."):
-                try:
-                    # Save the uploaded image to a temporary file
-                    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
-                        image.save(tmp_file.name)
-                        temp_path = tmp_file.name
-                    
-                    # Use the image processor to detect ingredients
-                    detected = image_proc.detect_food_items_from_image(temp_path)
-                    
-                    # Clean up the temporary file
-                    os.unlink(temp_path)
-                    
-                    # Update the ingredients list
-                    st.session_state.ingredients = list(set(detected))  # Ensure unique items
-                    st.success(f"Detected: {', '.join(detected)}")
-                except Exception as e:
-                    st.error(f"Detection failed: {str(e)}")
+                image_bytes = uploaded_file.read()
+                detected = image_proc.detect_food_items_from_image(image_bytes)
+                st.session_state.ingredients = list(set(detected))
+                st.success(f"Detected: {', '.join(detected)}")
 
 else:
     manual_input = st.sidebar.text_area("List ingredients (comma-separated)", height=150)

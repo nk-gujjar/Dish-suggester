@@ -4,3 +4,5 @@
 # Ignore config.py and __pycache__ directory
 /config.py
 /__pycache__/
+.env
+/venv/
