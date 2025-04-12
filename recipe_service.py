@@ -1,11 +1,15 @@
 from groq import Groq
-import config
+# import config
 import json
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
 class RecipeService:
     def __init__(self):
         """Initialize the recipe service with Groq client"""
-        self.client = Groq(api_key=config.GROQ_API_KEY)
+        self.client = Groq(api_key=api_key)
     
     def get_recipe_suggestions(self, ingredients, max_missing=3):
         """
