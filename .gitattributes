@@ -1,8 +1,0 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-
-# Ignore config.py and __pycache__ directory
-/config.py
-/__pycache__/
-.env
-/venv/
