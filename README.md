@@ -111,4 +111,3 @@ This project is open-sourced under the **MIT License**.
 ---
 
 Enjoy smarter cooking with AI! 🍳
-```
