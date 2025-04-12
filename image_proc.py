@@ -13,7 +13,7 @@ from pymongo.server_api import ServerApi
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY_VISION")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # MongoDB setup
 client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
