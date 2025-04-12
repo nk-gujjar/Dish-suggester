@@ -5,8 +5,9 @@ import os
 import base64
 from groq import Groq
 from dotenv import load_dotenv
-from pymongo import MongoClient
 from gridfs import GridFS
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 
 # Load environment variables
 load_dotenv()
@@ -15,7 +16,7 @@ DB_NAME = os.getenv("DB_NAME")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY_VISION")
 
 # MongoDB setup
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
 db = client[DB_NAME]
 fs = GridFS(db)
 
